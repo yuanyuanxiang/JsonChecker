@@ -1,0 +1,170 @@
+{
+  "Name": "大华股份",
+  "Version": "1.0",
+  "Date": "2019-11-19",
+  "Describe": "演示缺少层级的JSON",
+  "Templates": [
+    {
+      "interface": "faces",
+      "url": "/VIID/Faces",
+      "rules": [
+        {
+          "name": "FaceListObject",
+          "gaKey": "FaceObject",
+          "type": "object",
+          "parent": "",
+          "lossLevel": 1
+        },
+        {
+          "name": "FaceID",
+          "type": "string",
+          "parent": "FaceListObject",
+          "funcType": 1,
+          "funcArgs": 48
+        },
+        {
+          "name": "InfoKind",
+          "type": "string",
+          "parent": "FaceListObject",
+          "funcType": 3,
+          "funcArgs": [
+            "",
+            "0",
+            "1",
+            "2"
+          ]
+        },
+        {
+          "name": "SourceID",
+          "type": "string",
+          "parent": "FaceListObject",
+          "funcType": 1,
+          "funcArgs": 41
+        },
+        {
+          "name": "DeviceID",
+          "type": "string",
+          "parent": "FaceListObject",
+          "funcType": 1,
+          "funcArgs": 20
+        },
+        {
+          "name": "LeftTopX",
+          "type": "number",
+          "parent": "FaceListObject",
+          "funcType": 2,
+          "funcArgs": [
+            0,
+            1920
+          ]
+        },
+        {
+          "name": "LeftTopY",
+          "type": "number",
+          "parent": "FaceListObject",
+          "funcType": 2,
+          "funcArgs": [
+            0,
+            1920
+          ]
+        },
+        {
+          "name": "RightBtmX",
+          "type": "number",
+          "parent": "FaceListObject",
+          "funcType": 2,
+          "funcArgs": [
+            0,
+            1920
+          ]
+        },
+        {
+          "name": "RightBtmY",
+          "type": "number",
+          "parent": "FaceListObject",
+          "funcType": 2,
+          "funcArgs": [
+            0,
+            1920
+          ]
+        },
+        {
+          "name": "SubImageList",
+          "type": "object",
+          "parent": "FaceListObject"
+        },
+        {
+          "name": "SubImageInfoObject",
+          "type": "array",
+          "parent": "SubImageList"
+        },
+        {
+          "name": "ImageID",
+          "type": "string",
+          "parent": "SubImageInfoObject",
+          "funcType": 6,
+          "funcArgs": 48
+        },
+        {
+          "name": "EventSort",
+          "type": "number",
+          "parent": "SubImageInfoObject",
+          "funcType": 2,
+          "funcArgs": [
+            0,
+            36
+          ]
+        },
+        {
+          "name": "DeviceID",
+          "type": "string",
+          "parent": "SubImageInfoObject",
+          "funcType": 1,
+          "funcArgs": 20
+        },
+        {
+          "name": "Type",
+          "type": "string",
+          "parent": "SubImageInfoObject",
+          "funcType": 3,
+          "funcArgs": [
+            "",
+            "01",
+            "02"
+          ]
+        },
+        {
+          "name": "FileFormat",
+          "type": "string",
+          "parent": "SubImageInfoObject",
+          "funcType": 3,
+          "funcArgs": [
+            "",
+            "Bmp",
+            "Jpeg"
+          ]
+        },
+        {
+          "name": "ShotTime",
+          "type": "string",
+          "parent": "SubImageInfoObject",
+          "funcType": 5,
+          "funcArgs": [
+            0,
+            14
+          ]
+        },
+        {
+          "name": "Data",
+          "type": "string",
+          "parent": "SubImageInfoObject",
+          "funcType": 4,
+          "funcArgs": [
+            0,
+            1024000
+          ]
+        }
+      ]
+    }
+  ]
+}
