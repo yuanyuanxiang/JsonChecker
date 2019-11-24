@@ -33,7 +33,7 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CodeTransform.h">
+    <ClInclude Include="..\public\CodeTransform.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CodeTransform.cpp">
+    <ClCompile Include="..\public\CodeTransform.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

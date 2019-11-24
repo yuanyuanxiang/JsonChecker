@@ -168,7 +168,7 @@
       ]
     },
     {
-      "interface": "apesS",
+      "interface": "apes",
       "url": "/VIID/APEs",
       "describe": "A.1 采集设备对象",
       "rules": [

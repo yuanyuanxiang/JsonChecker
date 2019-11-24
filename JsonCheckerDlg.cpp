@@ -8,7 +8,9 @@
 #include "afxdialogex.h"
 #include <map>
 #include <vector>
-#include "CodeTransform.h"
+// 请克隆项目:https://github.com/yuanyuanxiang/public
+// 放到同级目录
+#include "../public/CodeTransform.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
