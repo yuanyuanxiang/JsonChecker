@@ -22,9 +22,10 @@ std::map<CString, CString> MAP;
 // 模版<编号，模版名>
 std::vector<CString> Template;
 const char *templateDir = "./template";
-#define LENGTH 12
+#define LENGTH 11
+#define PREFIX L"single-"
 // 对象类型
-const CString Interfaces[LENGTH] = { _T("auto(non-collection)"), _T("faces"),_T("persons"),
+const CString Interfaces[LENGTH] = { _T("faces"),_T("persons"),
 	_T("motorvehicles"),_T("nonmotorvehicles"),	_T("things"), _T("scenes"), 
 	_T("videolabels"),_T("videoslices"), _T("images"), _T("files"), _T("cases") };
 // 对象类型ID
@@ -190,11 +191,16 @@ BOOL CJsonCheckerDlg::OnInitDialog()
 		m_ComStandardTemplate.SetCurSel(m);
 	}
 
-	for (int i = 0; i < LENGTH; ++i)
-	{
-		m_ComInterfaceType.InsertString(i, Interfaces[i]);
-	}
+	m_ComInterfaceType.InsertString(0, _T("auto(non-collection)"));
 	m_ComInterfaceType.SetCurSel(0);
+	for (int i = 1; i <= LENGTH; ++i)
+	{
+		m_ComInterfaceType.InsertString(i, Interfaces[i-1]);
+	}
+	for (int i = 1; i <= LENGTH; ++i)
+	{
+		m_ComInterfaceType.InsertString(LENGTH+i, PREFIX+Interfaces[i-1]);
+	}
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -311,7 +317,7 @@ const char* GetJsonType(CString jsonPath) {
 		}
 		if (-1 != lower.Find(IDList[i])){
 			USES_CONVERSION;
-			strcpy_s(type, W2A(Interfaces[i+1]));
+			strcpy_s(type, W2A(Interfaces[i]));
 			break;
 		}
 	}
@@ -340,7 +346,9 @@ void CJsonCheckerDlg::OnBnClickedConvert()
 		".\\Checker.exe -debug=false -templateDir=\"%s\" "\
 		"-json=\"%s\" -template=\"%s\" -std=\"%s\" -interface=\"%s\"", 
 		templateDir, W2A(m_sJsonFile), W2A(mapFunc(Template[n])), W2A(mapFunc(Template[k])),
-		m == 0 ? GetJsonType(m_sJsonFile) : W2A(Interfaces[m]));
+		m == 0 ? GetJsonType(m_sJsonFile) : 
+		(m <= LENGTH ? W2A(Interfaces[m-1]):W2A(PREFIX+Interfaces[m-1-LENGTH]))
+	);
 	// 调用Golang Checker
 	PROCESS_INFORMATION pi;
 	STARTUPINFO si;
