@@ -107,7 +107,7 @@
           "type": "string",
           "parent": "SubImageInfoObject",
           "funcType": 6,
-          "funcArgs": 48
+          "funcArgs": 41
         },
         {
           "name": "EventSort",

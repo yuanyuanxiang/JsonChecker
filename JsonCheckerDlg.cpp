@@ -115,6 +115,7 @@ BEGIN_MESSAGE_MAP(CJsonCheckerDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_CONVERT, &CJsonCheckerDlg::OnBnClickedConvert)
 	ON_COMMAND(ID_FILE_OPEN32773, &CJsonCheckerDlg::OnFileOpen)
 	ON_EN_CHANGE(IDC_EDIT1, &CJsonCheckerDlg::OnEnChangeJSON)
+	ON_COMMAND(ID_FILE_GENERATE, &CJsonCheckerDlg::OnFileGenerate)
 END_MESSAGE_MAP()
 
 // 从给定目录获取模版
@@ -134,6 +135,15 @@ std::map<CString, CString> GetTemplate(const char *dir) {
 }
 
 // CJsonCheckerDlg 消息处理程序
+
+CString getPathByTemplate(CString name) {
+	for (std::map<CString, CString>::iterator i = MAP.begin(); i != MAP.end(); ++i)
+	{
+		if (i->first == name)
+			return i->second;
+	}
+	return _T("GA1400");
+}
 
 BOOL CJsonCheckerDlg::OnInitDialog()
 {
@@ -395,4 +405,46 @@ void CJsonCheckerDlg::OnEnChangeJSON()
 {
 	JsonChanged = true;
 	TRACE("===> JSON is changed.\n");
+}
+
+
+void CJsonCheckerDlg::OnFileGenerate()
+{
+	int n = m_ComVendorTemplate.GetCurSel();
+	int m = m_ComInterfaceType.GetCurSel();
+	USES_CONVERSION;
+	CString t = getPathByTemplate(Template[n]);
+	const char *temp = W2A(t);
+	const char *rules = m == 0 ? "faces" :
+		(m <= LENGTH ? W2A(Interfaces[m - 1]) : W2A(PREFIX + Interfaces[m - 1 - LENGTH]));
+	char buf[1024];
+	sprintf_s(buf, ".\\generate.exe -debug=false -template=\"%s\" -rules=\"%s\"", temp, rules);
+	// 调用Golang Checker
+	PROCESS_INFORMATION pi;
+	STARTUPINFO si;
+	memset(&si, 0, sizeof(si));
+	si.cb = sizeof(si);
+	si.wShowWindow = SW_HIDE;
+	si.dwFlags = STARTF_USESHOWWINDOW;
+	CString arg = CString(buf);
+	LPWSTR p = (LPWSTR)(LPCWSTR)arg;
+	BeginWaitCursor();
+	BOOL fRet = CreateProcess(_T(".\\generate.exe"), p,
+		NULL, FALSE, NULL, NULL, NULL, NULL, &si, &pi);
+	WaitForSingleObject(pi.hProcess, INFINITE);
+	EndWaitCursor();
+	if (fRet)
+	{
+		m_sJsonFile = CString("./generate.json");
+		BOOL b = PathFileExists(m_sJsonFile);
+		if (b) {
+			m_sJSON = ReadJSON(m_sJsonFile);
+			m_EditJSON.SetWindowText(m_sJSON);
+		}
+		if (!(b = PathFileExists(m_sJsonFile))) {
+			MessageBox(_T("Generate JSON failed."));
+		}
+	}
+	else
+		MessageBox(_T("Create process failed."));
 }

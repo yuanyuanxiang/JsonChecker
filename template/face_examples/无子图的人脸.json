@@ -1,0 +1,25 @@
+{
+  "FaceListObject": {
+    "FaceObject": [
+      {
+        "ShotTime": "",
+        "IsSuspectedTerrorist": 0,
+        "IsCriminalInvolved": 0,
+        "DeviceID": "11010800001190000001",
+        "FaceID": "110108000011900000020220190709121314000010600000",
+        "InfoKind": 1,
+        "LeftTopX": 0,
+        "LeftTopY": 1234,
+        "RightBtmX": 9,
+        "RightBtmY": 900,
+        "SourceID": "11010800001190000003032019070912131400001",
+        "IsVictim": 1,
+        "IsSuspiciousPerson": true,
+        "SubImageList": {
+          "SubImageInfoObject": [
+          ]
+        }
+      }
+    ]
+  }
+}

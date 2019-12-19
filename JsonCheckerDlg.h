@@ -49,4 +49,5 @@ public:
 	CComboBox m_ComInterfaceType;
 	int m_nInterfaceType;
 	afx_msg void OnEnChangeJSON();
+	afx_msg void OnFileGenerate();
 };
