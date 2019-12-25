@@ -1,9 +1,10 @@
 {
-  "Date": "2019-12-12",
-  "Describe": "GAT1400 A.9",
+  "Date": "2019-12-23",
+  "Describe": "GAT1400.3",
   "Name": "标准GAT1400",
   "Templates": [
     {
+      "describe": "全文共用且唯一的子图对象",
       "interface": "SubImageList",
       "rules": [
         {
@@ -201,7 +202,7 @@
           "parent": "SubImageInfoObject",
           "required": "O",
           "type": "object",
-          "funcType": 8
+          "reuseRule":"FeatureInfoObject"
         }
       ]
     },
@@ -244,6 +245,7 @@
           "parent": "FaceListObject",
           "required": "R",
           "type": "array",
+          "reuseRule":"FaceObject",
           "funcType": 23,
           "funcArgs": [
             [
@@ -261,7 +263,24 @@
               "IsDetainees"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "interface": "faces-arr",
+      "rules": [
+        {
+          "name": "FaceObject",
+          "parent": "",
+          "required": "R",
+          "type": "array",
+          "reuseRule":"FaceObject"
+        }
+      ]
+    },
+    {
+      "interface": "FaceObject",
+      "rules": [
         {
           "funcArgs": [
             48
@@ -1075,7 +1094,7 @@
           "type": "string"
         },
         {
-          "funcType": 8,
+          "reuseRule":"SubImageList",
           "name": "SubImageList",
           "parent": "FaceObject",
           "required": "R",
@@ -1092,8 +1111,7 @@
           "parent": "FeatureList",
           "required": "O",
           "type": "array",
-          "funcType": 8,
-          "funcArgs": "FeatureInfoObject"
+          "reuseRule":"FeatureInfoObject"
         },
         {
           "funcArgs": [
@@ -1123,6 +1141,7 @@
           "parent": "PersonListObject",
           "required": "R",
           "type": "array",
+          "reuseRule":"PersonObject",
           "funcType": 23,
           "funcArgs": [
             [
@@ -1144,7 +1163,24 @@
               "IsSuspiciousPerson"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "interface": "persons-arr",
+      "rules": [
+        {
+          "name": "PersonObject",
+          "parent": "",
+          "required": "R",
+          "type": "array",
+          "reuseRule":"PersonObject"
+        }
+      ]
+    },
+    {
+      "interface": "PersonObject",
+      "rules": [
         {
           "funcArgs": [
             48
@@ -2200,7 +2236,7 @@
           "type": "number"
         },
         {
-          "funcType": 8,
+          "reuseRule":"SubImageList",
           "name": "SubImageList",
           "parent": "PersonObject",
           "required": "R",
@@ -2223,6 +2259,7 @@
           "parent": "MotorVehicleListObject",
           "required": "R",
           "type": "array",
+          "reuseRule":"MotorVehicleObject",
           "funcType": 23,
           "funcArgs": [
             [
@@ -2236,7 +2273,24 @@
               "RightBtmY"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "interface": "motorvehicles-arr",
+      "rules": [
+        {
+          "name": "MotorVehicleObject",
+          "parent": "",
+          "required": "R",
+          "type": "array",
+          "reuseRule":"MotorVehicleObject"
+        }
+      ]
+    },
+    {
+      "interface": "MotorVehicleObject",
+      "rules": [
         {
           "funcArgs": [
             48
@@ -3037,7 +3091,7 @@
           "type": "string"
         },
         {
-          "funcType": 8,
+          "reuseRule":"SubImageList",
           "name": "SubImageList",
           "parent": "MotorVehicleObject",
           "required": "R",
@@ -3054,8 +3108,7 @@
           "parent": "FeatureList",
           "required": "O",
           "type": "array",
-          "funcType": 8,
-          "funcArgs": "FeatureInfoObject"
+          "reuseRule":"FeatureInfoObject"
         },
         {
           "funcArgs": [
@@ -3097,6 +3150,7 @@
           "type": "array",
           "parent": "NonMotorVehicleListObject",
           "required": "R",
+          "reuseRule":"NonMotorVehicleObject",
           "funcType": 23,
           "funcArgs": [
             [
@@ -3109,7 +3163,24 @@
               "RightBtmY"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "interface": "nonmotorvehicles-arr",
+      "rules": [
+        {
+          "name": "NonMotorVehicleObject",
+          "parent": "",
+          "required": "R",
+          "type": "array",
+          "reuseRule":"NonMotorVehicleObject"
+        }
+      ]
+    },
+    {
+      "interface": "NonMotorVehicleObject",
+      "rules": [
         {
           "name": "NonMotorVehicleID",
           "type": "string",
@@ -3598,7 +3669,7 @@
           "type": "object",
           "parent": "NonMotorVehicleObject",
           "required": "R",
-          "funcType": 8
+          "reuseRule":"SubImageList"
         }
       ]
     },
@@ -3618,6 +3689,7 @@
           "type": "array",
           "parent": "ThingListObject",
           "required": "R",
+          "reuseRule":"ThingObject",
           "funcType": 23,
           "funcArgs": [
             [
@@ -3630,7 +3702,24 @@
               "RightBtmY"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "interface": "things-arr",
+      "rules": [
+        {
+          "name": "ThingObject",
+          "parent": "",
+          "required": "R",
+          "type": "array",
+          "reuseRule":"ThingObject"
+        }
+      ]
+    },
+    {
+      "interface": "ThingObject",
+      "rules": [
         {
           "name": "ThingID",
           "type": "string",
@@ -3891,7 +3980,7 @@
           "type": "object",
           "parent": "ThingObject",
           "required": "R",
-          "funcType": 8
+          "reuseRule":"SubImageList"
         }
       ]
     },
@@ -3911,6 +4000,7 @@
           "type": "array",
           "parent": "SceneListObject",
           "required": "R",
+          "reuseRule":"SceneObject",
           "funcType": 23,
           "funcArgs": [
             [
@@ -3919,7 +4009,24 @@
               "DeviceID"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "interface": "scenes-arr",
+      "rules": [
+        {
+          "name": "SceneObject",
+          "parent": "",
+          "required": "R",
+          "type": "array",
+          "reuseRule":"SceneObject"
+        }
+      ]
+    },
+    {
+      "interface": "SceneObject",
+      "rules": [
         {
           "name": "SceneID",
           "type": "string",
@@ -4201,7 +4308,7 @@
           "type": "object",
           "parent": "SceneObject",
           "required": "R",
-          "funcType": 8
+          "reuseRule":"SubImageList"
         }
       ]
     },
@@ -4815,8 +4922,7 @@
           "parent": "VideoSliceListObject",
           "required": "R",
           "type": "array",
-          "funcType": 8,
-          "funcArgs": "videoSlicesOne"
+          "reuseRule":"videoSlicesOne"
         }
       ],
       "url": "/VIID/VideoSlices"
@@ -4835,8 +4941,7 @@
           "parent": "ImageListObject",
           "required": "R",
           "type": "array",
-          "funcType": 8,
-          "funcArgs": "imagesOne"
+          "reuseRule":"imagesOne"
         }
       ],
       "url": "/VIID/Images"
@@ -4855,8 +4960,7 @@
           "parent": "FileListObject",
           "required": "R",
           "type": "array",
-          "funcType": 8,
-          "funcArgs": "filesOne"
+          "reuseRule":"filesOne"
         }
       ],
       "url": "/VIID/Files"
@@ -4875,51 +4979,45 @@
           "type": "object",
           "parent": "",
           "required": "R",
-          "funcType": 8
+          "reuseRule":"VideoSliceInfo"
         },
         {
-          "funcArgs": "faces",
-          "funcType": 8,
+          "reuseRule":"faces",
           "name": "FaceList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "persons",
-          "funcType": 8,
+          "reuseRule":"persons",
           "name": "PersonList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "motorvehicles",
-          "funcType": 8,
+          "reuseRule":"motorvehicles",
           "name": "MotorVehicleList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "nonmotorvehicles",
-          "funcType": 8,
+          "reuseRule":"nonmotorvehicles",
           "name": "NonMotorVehicleList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "things",
-          "funcType": 8,
+          "reuseRule":"things",
           "name": "ThingList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "scenes",
-          "funcType": 8,
+          "reuseRule":"scenes",
           "name": "SceneList",
           "parent": "",
           "required": "O",
@@ -4941,51 +5039,45 @@
           "type": "object",
           "parent": "",
           "required": "R",
-          "funcType": 8
+          "reuseRule":"ImageInfo"
         },
         {
-          "funcArgs": "faces",
-          "funcType": 8,
+          "reuseRule":"faces",
           "name": "FaceList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "persons",
-          "funcType": 8,
+          "reuseRule":"persons",
           "name": "PersonList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "motorvehicles",
-          "funcType": 8,
+          "reuseRule":"motorvehicles",
           "name": "MotorVehicleList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "nonmotorvehicles",
-          "funcType": 8,
+          "reuseRule":"nonmotorvehicles",
           "name": "NonMotorVehicleList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "things",
-          "funcType": 8,
+          "reuseRule":"things",
           "name": "ThingList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "scenes",
-          "funcType": 8,
+          "reuseRule":"scenes",
           "name": "SceneList",
           "parent": "",
           "required": "O",
@@ -5007,51 +5099,45 @@
           "type": "object",
           "parent": "",
           "required": "R",
-          "funcType": 8
+          "reuseRule":"FileInfo"
         },
         {
-          "funcArgs": "faces",
-          "funcType": 8,
+          "reuseRule":"faces",
           "name": "FaceList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "persons",
-          "funcType": 8,
+          "reuseRule":"persons",
           "name": "PersonList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "motorvehicles",
-          "funcType": 8,
+          "reuseRule":"motorvehicles",
           "name": "MotorVehicleList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "nonmotorvehicles",
-          "funcType": 8,
+          "reuseRule":"nonmotorvehicles",
           "name": "NonMotorVehicleList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "things",
-          "funcType": 8,
+          "reuseRule":"things",
           "name": "ThingList",
           "parent": "",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "scenes",
-          "funcType": 8,
+          "reuseRule":"scenes",
           "name": "SceneList",
           "parent": "",
           "required": "O",
@@ -5073,7 +5159,7 @@
           "parent": "CaseObject",
           "required": "R",
           "type": "object",
-          "funcType": 8
+          "reuseRule":"CaseInfo"
         }
       ]
     },
@@ -5097,51 +5183,45 @@
           "parent": "Case",
           "required": "R",
           "type": "object",
-          "funcType": 8
+          "reuseRule":"CaseInfo"
         },
         {
-          "funcArgs": "faces",
-          "funcType": 8,
+          "reuseRule":"faces",
           "name": "FaceList",
           "parent": "Case",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "persons",
-          "funcType": 8,
+          "reuseRule":"persons",
           "name": "PersonList",
           "parent": "Case",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "motorvehicles",
-          "funcType": 8,
+          "reuseRule":"motorvehicles",
           "name": "MotorVehicleList",
           "parent": "Case",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "nonmotorvehicles",
-          "funcType": 8,
+          "reuseRule":"nonmotorvehicles",
           "name": "NonMotorVehicleList",
           "parent": "Case",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "things",
-          "funcType": 8,
+          "reuseRule":"things",
           "name": "ThingList",
           "parent": "Case",
           "required": "O",
           "type": "object"
         },
         {
-          "funcArgs": "scenes",
-          "funcType": 8,
+          "reuseRule":"scenes",
           "name": "SceneList",
           "parent": "Case",
           "required": "O",
@@ -5154,8 +5234,7 @@
           "type": "object"
         },
         {
-          "funcArgs": "videoSlicesOne",
-          "funcType": 8,
+          "reuseRule":"videoSlicesOne",
           "name": "VideoSliceObject",
           "parent": "VideoSliceList",
           "required": "O",
@@ -5168,8 +5247,7 @@
           "type": "object"
         },
         {
-          "funcArgs": "imagesOne",
-          "funcType": 8,
+          "reuseRule":"imagesOne",
           "name": "ImageObject",
           "parent": "ImageList",
           "required": "O",
@@ -5182,8 +5260,7 @@
           "type": "object"
         },
         {
-          "funcArgs": "filesOne",
-          "funcType": 8,
+          "reuseRule":"filesOne",
           "name": "FileObject",
           "parent": "FileList",
           "required": "O",
@@ -7213,7 +7290,7 @@
           "funcArgs": 20
         },
         {
-          "name": "LaneID",
+          "name": "LaneId",
           "type": "number",
           "parent": "LaneObject",
           "required": "R",
@@ -8480,535 +8557,8 @@
           "name": "FaceObjectList",
           "parent": "SubscribeNotificationObject",
           "required": "O",
-          "type": "object"
-        },
-        {
-          "name": "FaceObject",
-          "parent": "FaceObjectList",
-          "required": "O",
-          "type": "array"
-        },
-        {
-          "name": "AccompanyNumber",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "AcneStain",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "AgeLowerLimit",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "AgeUpLimit",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "Alias",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "Attitude",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "BodySpeciallMark",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "CapColor",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "CapStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "ChineseAccentCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "CorpseConditionCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "CrimeCharacterCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "CrimeMethod",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "CriminalInvolvedSpecilisationCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "DetaineesIdentity",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "DetaineesSpecialIdentity",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "DetentionHouseCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "DeviceID",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "EscapedCriminalNumber",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "EthicCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "EyebrowStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "FaceAppearTime",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "FaceID",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "SysCreateTime",
-          "parent": "FaceObject",
-          "required": "D",
-          "type": "string"
-        },
-        {
-          "name": "FaceStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "FacialFeature",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "FreckleBirthmark",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "GenderCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "GlassColor",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "GlassStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "HairColor",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "HairStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "IDNumber",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "IDType",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "ImmigrantTypeCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "InfoKind",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "InjuredDegree",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "IsCriminalInvolved",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "IsDetainees",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "IsDriver",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "IsForeigner",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "IsSuspectedTerrorist",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "IsSuspiciousPerson",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "IsVictim",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "Isvictim",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "JobCategory",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "LeftTopX",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "LeftTopY",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "LipStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "LocationMarkTime",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "MemberTypeCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "MustacheStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "Name",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "NationalityCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "NativeCityCode",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "NoseStyle",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "OtherFeature",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "PassportType",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "PersonDisAppearTime",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "PhysicalFeature",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "ResidenceAdminDivision",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "RespiratorColor",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "RightBtmX",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "RightBtmY",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "ScarDimple",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "Similaritydegree",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "SkinColor",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "SourceID",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "SubImageList",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "object"
-        },
-        {
-          "name": "SubImageInfoObject",
-          "parent": "SubImageList",
-          "required": "O",
-          "type": "array"
-        },
-        {
-          "name": "ContentDescription",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "Data",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "EventSort",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "FileFormat",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "FileSize",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "Height",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "ImageID",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "ImageSource",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "SecurityLevel",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "ShotPlaceFullAdress",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "ShotTime",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "Title",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "Width",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "number"
-        },
-        {
-          "name": "SuspectedTerroristNumber",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "UsedName",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "VictimType",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
-        },
-        {
-          "name": "WrinklePouch",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "string"
+          "type": "object",
+          "reuseRule":"faces-arr"
         },
         {
           "name": "InfoIDs",
@@ -9026,13 +8576,15 @@
           "name": "MotorVehicleObjectList",
           "parent": "SubscribeNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"motorvehicles-arr"
         },
         {
           "name": "NonMotorVehicleObjectList",
           "parent": "SubscribeNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"nonmotorvehicles-arr"
         },
         {
           "name": "NotificationID",
@@ -9044,13 +8596,15 @@
           "name": "PersonObjectList",
           "parent": "SubscribeNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"persons-arr"
         },
         {
           "name": "SceneObjectList",
           "parent": "SubscribeNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"scenes-arr"
         },
         {
           "name": "SubscribeID",
@@ -9062,7 +8616,8 @@
           "name": "ThingObjectList",
           "parent": "SubscribeNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"things-arr"
         },
         {
           "name": "TollgateObjectList",
@@ -9114,12 +8669,6 @@
           "type": "string"
         },
         {
-          "name": "MotorVehicleObject",
-          "parent": "DispositionNotificationObject",
-          "required": "O",
-          "type": "object"
-        },
-        {
           "name": "NotificationID",
           "parent": "DispositionNotificationObject",
           "required": "R",
@@ -9129,43 +8678,29 @@
           "name": "PersonObject",
           "parent": "DispositionNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"persons-arr"
         },
         {
           "name": "FaceObject",
           "parent": "DispositionNotificationObject",
           "required": "O",
-          "type": "object"
-        },
-        {
-          "name": "SubImageList",
-          "parent": "FaceObject",
-          "required": "O",
-          "type": "object"
-        },
-        {
-          "name": "SubImageInfoObject",
-          "parent": "SubImageList",
-          "required": "O",
-          "type": "array"
-        },
-        {
-          "name": "Title",
-          "parent": "SubImageInfoObject",
-          "required": "O",
-          "type": "string"
+          "type": "object",
+          "reuseRule":"faces-arr"
         },
         {
           "name": "MotorVehicleObject",
           "parent": "DispositionNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"motorvehicles-arr"
         },
         {
           "name": "NonMotorVehicleObject",
           "parent": "DispositionNotificationObject",
           "required": "O",
-          "type": "object"
+          "type": "object",
+          "reuseRule":"nonmotorvehicles-arr"
         },
         {
           "name": "Title",
