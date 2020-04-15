@@ -21,7 +21,6 @@ using namespace std;
 std::map<CString, CString> MAP;
 // 模版<编号，模版名>
 std::vector<CString> Template;
-const char *templateDir = "./template";
 #define LENGTH 11
 #define PREFIX L"single-"
 // 对象类型
@@ -34,7 +33,7 @@ const CString IDList[LENGTH] = { _T("\"faceid\""),_T("\"personid\""),
 	_T("\"videolabelid\""),_T("\"videosliceid\""), _T("\"imageid\""), _T("\"fileid\""), _T("\"caseid\"") };
 const char LogFile[] = "./error.log"; // 日志文件
 const char Output[] = "./output.json"; // 转换后的输出
-const char TemplateDir[] = "./template"; // 模板目录
+char TemplateDir[_MAX_PATH] = "./template"; // 模板目录
 
 bool JsonChanged = false;
 
@@ -177,10 +176,23 @@ BOOL CJsonCheckerDlg::OnInitDialog()
 	ShowWindow(SW_NORMAL);
 
 	// TODO: 在此添加额外的初始化代码
-	MAP = GetTemplate(TemplateDir);
+	GetPrivateProfileStringA("settings", "templateDir", "./template",
+		TemplateDir, _MAX_PATH, "./settings.ini");
+	if (!init(TemplateDir)) // 初始化模板文件
+	{
+		MessageBox(_T("Template file \"GA1400\" is missing."));
+	}
+
+	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+bool CJsonCheckerDlg::init(const char *path) {
+	MAP = GetTemplate(path);
 	int n = 0, m = 0;
 	bool standardExist = false;
-	for (std::map<CString, CString>::iterator i=MAP.begin(); i!=MAP.end(); ++i, ++n)
+	while(m_ComVendorTemplate.GetCount())m_ComVendorTemplate.DeleteString(0);
+	while (m_ComStandardTemplate.GetCount())m_ComStandardTemplate.DeleteString(0);
+	for (std::map<CString, CString>::iterator i = MAP.begin(); i != MAP.end(); ++i, ++n)
 	{
 		m_ComVendorTemplate.InsertString(n, i->first);
 		m_ComStandardTemplate.InsertString(n, i->first);
@@ -191,28 +203,23 @@ BOOL CJsonCheckerDlg::OnInitDialog()
 			m = n;
 		}
 	}
-	if (!standardExist)
-	{
-		MessageBox(_T("Template file \"GA1400\" is missing."));
-	}
 	if (MAP.size())
 	{
 		m_ComVendorTemplate.SetCurSel(0);
 		m_ComStandardTemplate.SetCurSel(m);
 	}
-
+	while (m_ComInterfaceType.GetCount())m_ComInterfaceType.DeleteString(0);
 	m_ComInterfaceType.InsertString(0, _T("auto(non-collection)"));
 	m_ComInterfaceType.SetCurSel(0);
 	for (int i = 1; i <= LENGTH; ++i)
 	{
-		m_ComInterfaceType.InsertString(i, Interfaces[i-1]);
+		m_ComInterfaceType.InsertString(i, Interfaces[i - 1]);
 	}
 	for (int i = 1; i <= LENGTH; ++i)
 	{
-		m_ComInterfaceType.InsertString(LENGTH+i, PREFIX+Interfaces[i-1]);
+		m_ComInterfaceType.InsertString(LENGTH + i, PREFIX + Interfaces[i - 1]);
 	}
-
-	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+	return standardExist;
 }
 
 void CJsonCheckerDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -267,9 +274,22 @@ HCURSOR CJsonCheckerDlg::OnQueryDragIcon()
 
 void CJsonCheckerDlg::OnFileSettings()
 {
-	// TODO: 在此添加命令处理程序代码
+	char szPath[MAX_PATH] = { 0 };
+	BROWSEINFO bi = { 0 };
+	bi.hwndOwner = m_hWnd;
+	bi.lpszTitle = _T("Select template dir");
+	LPITEMIDLIST lp = SHBrowseForFolder(&bi);
+	if (lp && SHGetPathFromIDListA(lp, szPath))
+	{
+		if (init(szPath))
+		{
+			strcpy_s(TemplateDir, szPath);
+			WritePrivateProfileStringA("settings", "templateDir", TemplateDir, "./settings.ini");
+		} else {
+			MessageBox(_T("Template file \"GA1400\" is missing."));
+		}
+	}
 }
-
 
 void CJsonCheckerDlg::OnFileQuit()
 {
@@ -355,7 +375,7 @@ void CJsonCheckerDlg::OnBnClickedConvert()
 	sprintf_s(buf, 
 		".\\Checker.exe -debug=false -templateDir=\"%s\" "\
 		"-json=\"%s\" -template=\"%s\" -std=\"%s\" -interface=\"%s\"", 
-		templateDir, W2A(m_sJsonFile), W2A(mapFunc(Template[n])), W2A(mapFunc(Template[k])),
+		TemplateDir, W2A(m_sJsonFile), W2A(mapFunc(Template[n])), W2A(mapFunc(Template[k])),
 		m == 0 ? GetJsonType(m_sJsonFile) : 
 		(m <= LENGTH ? W2A(Interfaces[m-1]):W2A(PREFIX+Interfaces[m-1-LENGTH]))
 	);
